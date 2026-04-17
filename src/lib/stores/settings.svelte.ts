@@ -2488,7 +2488,7 @@ class SettingsStore {
   }
 
   async setDebugMode(enabled: boolean) {
-    this.uiSettings.debugMode = enabled
+    debug.isActive = this.uiSettings.debugMode = enabled
     await database.setSetting('debug_mode', enabled.toString())
   }
 
