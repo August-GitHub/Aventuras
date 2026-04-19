@@ -18,8 +18,61 @@ permissions:
   contents: write
 
 jobs:
+  # 版本一致性检查 - 确保所有版本源同步
+  check-version:
+    name: Check Version Consistency
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Extract version from package.json
+        id: pkg-version
+        run: echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
+
+      - name: Extract version from Cargo.toml
+        id: cargo-version
+        run: echo "VERSION=$(grep '^version' src-tauri/Cargo.toml | sed 's/version = \"\(.*\)\"/\1/')" >> $GITHUB_OUTPUT
+
+      - name: Extract version from tag
+        id: tag-version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Validate versions consistency
+        run: |
+          PKG_VERSION="${{ steps.pkg-version.outputs.VERSION }}"
+          CARGO_VERSION="${{ steps.cargo-version.outputs.VERSION }}"
+          TAG_VERSION="${{ steps.tag-version.outputs.VERSION }}"
+          
+          echo "📦 package.json 版本: $PKG_VERSION"
+          echo "📋 Cargo.toml 版本: $CARGO_VERSION"
+          echo "🏷️  Git 标签版本: v$TAG_VERSION"
+          
+          if [ "$PKG_VERSION" != "$CARGO_VERSION" ]; then
+            echo "❌ 错误：package.json 和 Cargo.toml 版本不一致！"
+            echo "   package.json: $PKG_VERSION"
+            echo "   Cargo.toml:  $CARGO_VERSION"
+            exit 1
+          fi
+          
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "❌ 错误：Git 标签版本与文件版本不一致！"
+            echo "   Git 标签:    v$TAG_VERSION"
+            echo "   文件版本:    $PKG_VERSION"
+            exit 1
+          fi
+          
+          echo "✅ 所有版本号一致！"
+
   build-android:
     runs-on: ubuntu-latest
+    needs: [check-version]
 
     steps:
       - name: Checkout

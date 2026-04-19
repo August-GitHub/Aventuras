@@ -349,7 +349,8 @@
             </p>
             <div class="flex flex-row gap-2">
               <Button variant="secondary" size="sm" class="h-7 text-xs" onclick={showMoreAbove}>
-                {t('story').showMore} {Math.min(LOAD_MORE_BATCH, displayedEntries.hiddenAtTop)}
+                {t('story').showMore}
+                {Math.min(LOAD_MORE_BATCH, displayedEntries.hiddenAtTop)}
               </Button>
               {#if !settings.uiSettings.showScrollToTop}
                 <Button variant="secondary" size="sm" class="h-7 text-xs" onclick={scrollToTop}>
@@ -388,11 +389,15 @@
         {#if displayedEntries.hiddenAtBottom > 0}
           <div class="border-border mt-3 flex flex-col items-center gap-2 border-t py-3">
             <p class="text-muted-foreground text-sm">
-              {t('story').entriesHidden.replace('{count}', displayedEntries.hiddenAtBottom.toString())}
+              {t('story').entriesHidden.replace(
+                '{count}',
+                displayedEntries.hiddenAtBottom.toString(),
+              )}
             </p>
             <div class="flex flex-row gap-2">
               <Button variant="secondary" size="sm" class="h-7 text-xs" onclick={showMoreBelow}>
-                {t('story').showMore} {Math.min(LOAD_MORE_BATCH, displayedEntries.hiddenAtBottom)}
+                {t('story').showMore}
+                {Math.min(LOAD_MORE_BATCH, displayedEntries.hiddenAtBottom)}
               </Button>
               {#if !settings.uiSettings.showScrollToBottom}
                 <Button variant="secondary" size="sm" class="h-7 text-xs" onclick={scrollToBottom}>

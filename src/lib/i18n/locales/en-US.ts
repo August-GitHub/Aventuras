@@ -129,7 +129,8 @@ export const enUS: TranslationKeys = {
     experimental: 'Experimental',
     story: 'Story',
     resetAll: 'Reset All',
-    resetConfirm: 'Reset all settings to default?\n\nYour API key will be preserved, but all other settings (model, temperature, prompts, UI preferences) will be reset.\n\nThis action cannot be undone.',
+    resetConfirm:
+      'Reset all settings to default?\n\nYour API key will be preserved, but all other settings (model, temperature, prompts, UI preferences) will be reset.\n\nThis action cannot be undone.',
     resetDescription: 'Reset all settings to default. API key will be preserved.',
     model: 'Model',
     temperature: 'Temperature',
@@ -210,7 +211,8 @@ export const enUS: TranslationKeys = {
     memoryLoading: 'Loading...',
     backToStory: 'Back to Story',
     noChapters: 'No Chapters Yet',
-    chaptersAuto: 'Chapters are created automatically when the story grows beyond the token threshold, or you can create one manually using the button above.',
+    chaptersAuto:
+      'Chapters are created automatically when the story grows beyond the token threshold, or you can create one manually using the button above.',
     contextUsage: 'Context Usage',
     used: 'Used',
     budget: 'Budget',
@@ -350,7 +352,6 @@ export const enUS: TranslationKeys = {
     reviewImport: 'Review Import',
     world: 'World',
     style: 'Style',
-    characters: 'Characters',
   },
 
   vault: {

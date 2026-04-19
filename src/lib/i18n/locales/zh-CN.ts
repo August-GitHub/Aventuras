@@ -129,7 +129,8 @@ export const zhCN: TranslationKeys = {
     experimental: '实验室',
     story: '故事',
     resetAll: '重置全部',
-    resetConfirm: '将所有设置重置为默认值？\n\n您的 API key 将被保留，但所有其他设置（模型、温度、提示词、UI 偏好）将被重置。\n\n此操作无法撤销。',
+    resetConfirm:
+      '将所有设置重置为默认值？\n\n您的 API key 将被保留，但所有其他设置（模型、温度、提示词、UI 偏好）将被重置。\n\n此操作无法撤销。',
     resetDescription: '将所有设置重置为默认值。API key 会被保留。',
     model: '模型',
     temperature: '温度',
@@ -350,7 +351,6 @@ export const zhCN: TranslationKeys = {
     reviewImport: '审核导入',
     world: '世界',
     style: '风格',
-    characters: '角色',
   },
 
   vault: {

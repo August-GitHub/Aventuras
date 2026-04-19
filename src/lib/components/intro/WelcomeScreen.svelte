@@ -275,7 +275,8 @@
           </Card.Content>
           <Card.Footer>
             <Button class="w-full" size="lg" onclick={goToSelect}>
-              {t('welcome').nextStep} <ArrowRight class="ml-2 h-4 w-4" />
+              {t('welcome').nextStep}
+              <ArrowRight class="ml-2 h-4 w-4" />
             </Button>
           </Card.Footer>
         </Card.Root>
@@ -313,7 +314,8 @@
             onclick={() => (step = 'interface')}
             class="text-muted-foreground hover:text-foreground"
           >
-            <ArrowLeft size={16} class="mr-2" /> {t('welcome').backToCustomization}
+            <ArrowLeft size={16} class="mr-2" />
+            {t('welcome').backToCustomization}
           </Button>
         </div>
       </div>
@@ -350,7 +352,8 @@
                         rel="noopener noreferrer"
                         class="text-primary flex items-center gap-1 text-xs hover:underline"
                       >
-                        {t('welcome').getKey} <ExternalLink size={10} />
+                        {t('welcome').getKey}
+                        <ExternalLink size={10} />
                       </a>
                     {/if}
                   </div>

@@ -148,10 +148,10 @@
   }
 
   async function handleResetAll() {
-    const confirmed = await ask(
-      t('settings').resetConfirm,
-      { title: t('settings').resetAll, kind: 'warning' },
-    )
+    const confirmed = await ask(t('settings').resetConfirm, {
+      title: t('settings').resetAll,
+      kind: 'warning',
+    })
     if (!confirmed) return
 
     isResettingSettings = true

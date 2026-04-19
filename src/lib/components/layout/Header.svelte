@@ -101,7 +101,10 @@
     } catch (error) {
       console.error('[Header] Export failed:', error)
       ui.showToast(
-        t('toast').exportFailed.replace('{error}', error instanceof Error ? error.message : t('toast').unknownError),
+        t('toast').exportFailed.replace(
+          '{error}',
+          error instanceof Error ? error.message : t('toast').unknownError,
+        ),
         'error',
       )
     }
@@ -208,15 +211,15 @@
 
       <!-- Image generation status indicators -->
       {#if ui.imageAnalysisInProgress}
-        <div
-          class="flex items-center gap-1.5 text-sm text-blue-400"
-          title={t('story').analyzing}
-        >
+        <div class="flex items-center gap-1.5 text-sm text-blue-400" title={t('story').analyzing}>
           <ImageIcon class="h-3.5 w-3.5 animate-pulse" />
           <span class="hidden sm:inline">{t('story').analyzing}</span>
         </div>
       {:else if ui.imagesGenerating > 0}
-        <div class="flex items-center gap-1.5 text-sm text-emerald-400" title={t('story').imageGeneration}>
+        <div
+          class="flex items-center gap-1.5 text-sm text-emerald-400"
+          title={t('story').imageGeneration}
+        >
           <ImageIcon class="h-3.5 w-3.5" />
           <span class="hidden sm:inline">
             {ui.imagesGenerating} image{ui.imagesGenerating > 1 ? 's' : ''}

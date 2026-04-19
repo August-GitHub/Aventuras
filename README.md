@@ -154,9 +154,146 @@ Available `npm run` scripts:
 - `check:watch`: Watch mode type checking
 - `tauri`: Tauri CLI commands
 - `release`: Run release script (`node scripts/release.js`)
+- `release:auto`: 自动发布版本（使用 standard-version）
+- `release:pre`: 发布预发布版本（使用 standard-version）
 - `lint`: Run ESLint
 - `lint:fix`: Fix ESLint issues
 - `format`: Format code with Prettier
+
+## 版本管理 (Version Management)
+
+本项目使用 [standard-version](https://github.com/conventional-changelog/standard-version) 工具进行自动化版本管理。
+
+### 为什么需要自动化版本管理？
+
+项目中有多个版本源需要保持同步：
+- `package.json` - 前端版本号
+- `src-tauri/Cargo.toml` - Rust 后端版本号
+- Git 标签 - 用于触发 CI/CD 构建
+
+手动管理这些版本容易导致不一致问题，因此我们引入了自动化工具。
+
+### 如何使用？
+
+#### 1. 创建预发布版本（推荐用于测试）
+
+```bash
+# 方式一：自动创建预发布版本（推荐）
+npm run release:pre
+
+# 方式二：手动指定预发布标识符
+npm run release:auto -- --prerelease alpha
+```
+
+**执行效果：**
+- ✅ 自动更新 `package.json` 版本号（如 0.7.0-pre.6 → 0.7.0-pre.7）
+- ✅ 自动更新 `src-tauri/Cargo.toml` 版本号
+- ✅ 创建 Git 提交和标签（如 v0.7.0-pre.7）
+- ✅ 更新 CHANGELOG.md（如存在）
+
+#### 2. 创建正式版本
+
+```bash
+# 自动根据 commit 类型推断版本号
+npm run release:auto
+```
+
+**版本号递增规则：**
+| Commit 类型 | 版本更新 | 示例 |
+|------------|---------|------|
+| `feat:` 新功能 | Minor (小版本) | 0.1.0 → 0.2.0 |
+| `fix:` 修复 | Patch (补丁) | 0.1.0 → 0.1.1 |
+| `BREAKING CHANGE:` | Major (大版本) | 0.1.0 → 1.0.0 |
+
+#### 3. 手动指定版本号
+
+```bash
+# 指定特定版本号
+npm run release:auto -- --release-as 1.0.0
+
+# 指定预发布版本号
+npm run release:auto -- --release-as 0.8.0-pre.1
+```
+
+#### 4. 推送并触发构建
+
+```bash
+# 推送代码和标签到 GitHub（会自动触发 CI/CD 构建）
+git push origin master && git push origin --tags
+```
+
+### Commit 规范要求
+
+为了使 standard-version 正确工作，请遵循以下 commit 规范：
+
+```bash
+# 新功能
+git commit -m "feat: 添加中文翻译系统"
+
+# 修复 bug
+git commit -m "fix: 修复登录页面崩溃问题"
+
+# 性能优化
+git commit -m "perf: 优化图片加载速度"
+
+# 文档更新
+git commit -m "docs: 更新 API 使用说明"
+
+# 其他改动（不会触发版本更新）
+git commit -m "chore: 更新依赖包"
+```
+
+### 配置文件说明
+
+- **`.versionrc.json`**: standard-version 的配置文件
+  - 定义 commit 类型映射
+  - 配置要更新的文件列表
+  - 自定义 changelog 格式
+
+- **`scripts/cargo-bumper.js`**: Cargo.toml 版本更新器
+  - 用于同步更新 Rust 后端的版本号
+  - 被 `.versionrc.json` 引用
+
+### CI/CD 版本一致性检查
+
+GitHub Actions 在构建前会自动检查版本一致性：
+
+✅ **检查内容：**
+- `package.json` 和 `Cargo.toml` 版本是否一致
+- Git 标签版本与文件版本是否一致
+
+❌ **如果检测到不一致：**
+- 构建会立即失败
+- 显示详细的错误信息
+- 需要修复后重新推送
+
+**示例错误信息：**
+```
+❌ 错误：package.json 和 Cargo.toml 版本不一致！
+   package.json: 0.7.3-pre.1
+   Cargo.toml:  0.7.0-pre.6
+```
+
+### 常见问题
+
+#### Q: 我可以手动修改版本号吗？
+A: 可以，但强烈建议使用 `npm run release:pre` 或 `npm run release:auto` 来确保所有版本源同步。
+
+#### Q: 如果我忘记使用标准流程怎么办？
+A: CI 会自动检测版本不一致并阻止构建，你需要：
+1. 手动统一所有版本号
+2. 重新提交代码
+3. 删除旧标签并重新创建
+
+#### Q: 如何查看当前版本？
+A: 查看 `package.json` 或 `src-tauri/Cargo.toml` 中的 version 字段。
+
+### 最佳实践总结
+
+1. **开发阶段**：使用 `npm run release:pre` 创建测试版
+2. **正式发布**：使用 `npm run release:auto` 创建稳定版
+3. **推送前检查**：确保本地测试通过后再推送
+4. **遵循规范**：使用规范的 commit 信息格式
 
 ### Tests
 

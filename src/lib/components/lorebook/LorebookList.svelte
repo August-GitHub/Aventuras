@@ -204,7 +204,9 @@
             <Button {...props} variant="outline" class="w-full justify-between font-normal">
               <span class="flex items-center gap-2 capitalize">
                 <Filter class="text-muted-foreground h-4 w-4" />
-                {ui.lorebookTypeFilter === 'all' ? t('lorebook').all : t('lorebook')[ui.lorebookTypeFilter] || ui.lorebookTypeFilter}
+                {ui.lorebookTypeFilter === 'all'
+                  ? t('lorebook').all
+                  : t('lorebook')[ui.lorebookTypeFilter] || ui.lorebookTypeFilter}
               </span>
             </Button>
           {/snippet}
