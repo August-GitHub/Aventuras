@@ -13,6 +13,32 @@ export interface TranslationKeys {
     success: string
     warning: string
     info: string
+    delete: string
+    edit: string
+    add: string
+    remove: string
+    update: string
+    import: string
+    export: string
+    search: string
+    filter: string
+    sort: string
+    new: string
+    view: string
+    create: string
+    open: string
+    send: string
+    retry: string
+    continue: string
+    confirm: string
+    reset: string
+    more: string
+    show: string
+    hide: string
+    enabled: string
+    disabled: string
+    on: string
+    off: string
   }
 
   header: {
@@ -81,6 +107,14 @@ export interface TranslationKeys {
     generating: string
     analyzing: string
     imageGeneration: string
+    adventureBegins: string
+    typeAction: string
+    entriesHidden: string
+    showMore: string
+    goToTop: string
+    goToBottom: string
+    scrollToFirst: string
+    scrollToBottom: string
   }
 
   settings: {
@@ -97,6 +131,23 @@ export interface TranslationKeys {
     resetAll: string
     resetConfirm: string
     resetDescription: string
+    model: string
+    temperature: string
+    maxTokens: string
+    systemPrompt: string
+    profile: string
+    provider: string
+    endpoint: string
+    apiKey: string
+    font: string
+    theme: string
+    storyWidth: string
+    autoScroll: string
+    suggestions: string
+    scrollButtons: string
+    wordCount: string
+    darkMode: string
+    accessibility: string
   }
 
   lorebook: {
@@ -128,6 +179,18 @@ export interface TranslationKeys {
     secret: string
     active: string
     inactive: string
+    firstMentioned: string
+    lastMentioned: string
+    mentionCount: string
+    injection: string
+    context: string
+    relevance: string
+    threshold: string
+    worldState: string
+    adventureState: string
+    creativeState: string
+    blacklisted: string
+    createdBy: string
   }
 
   memory: {
@@ -145,6 +208,17 @@ export interface TranslationKeys {
     settings: string
     manualChapter: string
     memoryLoading: string
+    backToStory: string
+    noChapters: string
+    chaptersAuto: string
+    contextUsage: string
+    used: string
+    budget: string
+    threshold: string
+    buffer: string
+    autoChapter: string
+    maxEntries: string
+    maxTokens: string
   }
 
   world: {
@@ -165,6 +239,31 @@ export interface TranslationKeys {
     milestones: string
     revelations: string
     plotPoints: string
+    disposition: string
+    portrait: string
+    status: string
+    description: string
+    tags: string
+    addCharacter: string
+    addLocation: string
+    addItem: string
+    addQuest: string
+    addRelationship: string
+    discovered: string
+    notDiscovered: string
+    quantity: string
+    equipped: string
+    unequipped: string
+    objectives: string
+    rewards: string
+    startDate: string
+    endDate: string
+    year: string
+    day: string
+    hour: string
+    minute: string
+    timeAdvance: string
+    timePassed: string
   }
 
   export: {
@@ -175,6 +274,9 @@ export interface TranslationKeys {
     exportCancelled: string
     exportFailed: string
     importSTChat: string
+    exportAs: string
+    confirmExport: string
+    format: string
   }
 
   toast: {
@@ -183,11 +285,172 @@ export interface TranslationKeys {
     exportFailed: string
     generationFailed: string
     unknownError: string
+    apiKeyRequired: string
+    storySaved: string
+    entryAdded: string
+    entryUpdated: string
+    entryDeleted: string
+    chapterCreated: string
+    chapterUpdated: string
+    chapterDeleted: string
+    resummarized: string
+    loreManagementComplete: string
+    syncConnected: string
+    syncDisconnected: string
   }
 
   errors: {
     apiKeyRequired: string
     initializationFailed: string
     noCurrentStory: string
+    generationFailed: string
+    networkError: string
+    fileError: string
+    invalidFormat: string
+    notFound: string
+    permissionDenied: string
+  }
+
+  wizard: {
+    title: string
+    subtitle: string
+    mode: string
+    adventure: string
+    creative: string
+    adventureDesc: string
+    creativeDesc: string
+    setting: string
+    genre: string
+    fantasy: string
+    scifi: string
+    mystery: string
+    horror: string
+    sliceOfLife: string
+    custom: string
+    characters: string
+    protagonist: string
+    name: string
+    gender: string
+    age: string
+    appearance: string
+    personality: string
+    background: string
+    supportingCast: string
+    portraits: string
+    writingStyle: string
+    pov: string
+    tense: string
+    opening: string
+    scene: string
+    finish: string
+    createStory: string
+    importing: string
+    selectFiles: string
+    uploadFiles: string
+    reviewImport: string
+    world: string
+    style: string
+    characters: string
+  }
+
+  vault: {
+    title: string
+    browse: string
+    search: string
+    filter: string
+    sort: string
+    type: string
+    name: string
+    author: string
+    description: string
+    version: string
+    tags: string
+    downloads: string
+    rating: string
+    created: string
+    updated: string
+    import: string
+    export: string
+    delete: string
+    edit: string
+    preview: string
+    install: string
+    uninstall: string
+    update: string
+    share: string
+    duplicate: string
+    publish: string
+    unpublish: string
+    private: string
+    public: string
+    draft: string
+    published: string
+    pack: string
+    template: string
+    scenario: string
+    lorebook: string
+    character: string
+    prompt: string
+    variables: string
+    runtime: string
+    static: string
+    group: string
+    category: string
+    collection: string
+    assistant: string
+    suggestions: string
+    history: string
+    diff: string
+    changes: string
+    compare: string
+    merge: string
+    conflict: string
+    pending: string
+    sync: string
+    backup: string
+    restore: string
+  }
+
+  sync: {
+    title: string
+    status: string
+    connected: string
+    disconnected: string
+    connecting: string
+    server: string
+    client: string
+    startServer: string
+    stopServer: string
+    connect: string
+    disconnect: string
+    qrCode: string
+    scanCode: string
+    shareStory: string
+    pullStory: string
+    pushStory: string
+    devices: string
+    deviceName: string
+    lastSeen: string
+    syncStatus: string
+    lastSync: string
+    nextSync: string
+  }
+
+  debug: {
+    title: string
+    logs: string
+    clearLogs: string
+    exportLogs: string
+    level: string
+    verbose: string
+    info: string
+    warn: string
+    error: string
+    lorebook: string
+    memory: string
+    generation: string
+    network: string
+    performance: string
+    profiling: string
   }
 }

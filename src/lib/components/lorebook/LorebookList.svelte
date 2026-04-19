@@ -58,9 +58,9 @@
     value: 'name' | 'type' | 'updated'
     label: string
   }> = [
-    { value: 'name', label: 'Name' },
-    { value: 'type', label: 'Type' },
-    { value: 'updated', label: 'Recently Updated' },
+    { value: 'name', label: t('lorebook').name },
+    { value: 'type', label: t('lorebook').type },
+    { value: 'updated', label: t('lorebook').updated },
   ]
 
   // Lore management active state - disable editing actions
@@ -179,7 +179,7 @@
     <div class="relative">
       <Input
         type="text"
-        placeholder="Search entries..."
+        placeholder={t('lorebook').search}
         value={ui.lorebookSearchQuery}
         oninput={handleSearchInput}
         class="w-full pr-8 pl-9"
@@ -204,7 +204,7 @@
             <Button {...props} variant="outline" class="w-full justify-between font-normal">
               <span class="flex items-center gap-2 capitalize">
                 <Filter class="text-muted-foreground h-4 w-4" />
-                {ui.lorebookTypeFilter === 'all' ? 'All Types' : ui.lorebookTypeFilter}
+                {ui.lorebookTypeFilter === 'all' ? t('lorebook').all : t('lorebook')[ui.lorebookTypeFilter as keyof typeof t('lorebook')] || ui.lorebookTypeFilter}
               </span>
             </Button>
           {/snippet}

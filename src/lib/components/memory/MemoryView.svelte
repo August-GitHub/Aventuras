@@ -11,6 +11,7 @@
   import { BookOpen, ArrowLeft } from 'lucide-svelte'
   import { Button } from '$lib/components/ui/button'
   import { EmptyState } from '$lib/components/ui/empty-state'
+  import { t } from '$lib/i18n'
 
   // Get chapters sorted by number (descending - newest first)
 
@@ -189,7 +190,7 @@
       onclick={() => ui.setActivePanel('story')}
     >
       <ArrowLeft class="h-3.5 w-3.5" />
-      <span>Back to Story</span>
+      <span>{t('memory').backToStory}</span>
     </Button>
   </div>
 
@@ -217,8 +218,8 @@
       <div class="py-12">
         <EmptyState
           icon={BookOpen}
-          title="No Chapters Yet"
-          description="Chapters are created automatically when the story grows beyond the token threshold, or you can create one manually using the button above."
+          title={t('memory').noChapters}
+          description={t('memory').chaptersAuto}
         />
       </div>
     {/if}

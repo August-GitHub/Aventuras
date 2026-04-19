@@ -11,6 +11,7 @@
   import ActionChoices from './ActionChoices.svelte'
   import { Button } from '$lib/components/ui/button'
   import EmptyState from '$lib/components/ui/empty-state/empty-state.svelte'
+  import { t } from '$lib/i18n'
 
   const storyMaxWidthStyle = $derived.by(() => {
     const maxWidth =
@@ -335,8 +336,8 @@
       {#if story.entries.length === 0 && !ui.isStreaming}
         <EmptyState
           icon={BookOpen}
-          title="Your adventure begins here..."
-          description="Type an action below to start your story."
+          title={t('story').adventureBegins}
+          description={t('story').typeAction}
           class="py-12 sm:py-20"
         />
       {:else}
@@ -344,15 +345,15 @@
         {#if displayedEntries.hiddenAtTop > 0}
           <div class="border-border mb-3 flex flex-col items-center gap-2 border-b py-3">
             <p class="text-muted-foreground text-sm">
-              {displayedEntries.hiddenAtTop} earlier entries hidden for performance
+              {t('story').entriesHidden.replace('{count}', displayedEntries.hiddenAtTop.toString())}
             </p>
             <div class="flex flex-row gap-2">
               <Button variant="secondary" size="sm" class="h-7 text-xs" onclick={showMoreAbove}>
-                Show {Math.min(LOAD_MORE_BATCH, displayedEntries.hiddenAtTop)} more
+                {t('story').showMore} {Math.min(LOAD_MORE_BATCH, displayedEntries.hiddenAtTop)}
               </Button>
               {#if !settings.uiSettings.showScrollToTop}
                 <Button variant="secondary" size="sm" class="h-7 text-xs" onclick={scrollToTop}>
-                  Go to top
+                  {t('story').goToTop}
                 </Button>
               {/if}
             </div>
@@ -387,15 +388,15 @@
         {#if displayedEntries.hiddenAtBottom > 0}
           <div class="border-border mt-3 flex flex-col items-center gap-2 border-t py-3">
             <p class="text-muted-foreground text-sm">
-              {displayedEntries.hiddenAtBottom} later entries hidden for performance
+              {t('story').entriesHidden.replace('{count}', displayedEntries.hiddenAtBottom.toString())}
             </p>
             <div class="flex flex-row gap-2">
               <Button variant="secondary" size="sm" class="h-7 text-xs" onclick={showMoreBelow}>
-                Show {Math.min(LOAD_MORE_BATCH, displayedEntries.hiddenAtBottom)} more
+                {t('story').showMore} {Math.min(LOAD_MORE_BATCH, displayedEntries.hiddenAtBottom)}
               </Button>
               {#if !settings.uiSettings.showScrollToBottom}
                 <Button variant="secondary" size="sm" class="h-7 text-xs" onclick={scrollToBottom}>
-                  Go to bottom
+                  {t('story').goToBottom}
                 </Button>
               {/if}
             </div>
