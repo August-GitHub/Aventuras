@@ -30,6 +30,7 @@
     MessageSquare,
     AlertTriangle,
   } from 'lucide-svelte'
+  import { t } from '$lib/i18n'
 
   let showExportMenu = $state(false)
 
@@ -93,14 +94,14 @@
     try {
       const success = await exportFn()
       if (success) {
-        ui.showToast(`Exported story as ${formatName}`, 'info')
+        ui.showToast(t('toast').exportedStory.replace('{format}', formatName), 'info')
       } else {
-        ui.showToast('Export cancelled', 'info')
+        ui.showToast(t('toast').exportCancelled, 'info')
       }
     } catch (error) {
       console.error('[Header] Export failed:', error)
       ui.showToast(
-        `Export failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        t('toast').exportFailed.replace('{error}', error instanceof Error ? error.message : t('toast').unknownError),
         'error',
       )
     }
@@ -201,7 +202,7 @@
       {#if ui.isGenerating}
         <div class="text-accent-400 hidden items-center gap-1.5 text-sm sm:flex">
           <div class="bg-accent-500 h-2 w-2 animate-pulse rounded-full"></div>
-          <span>Generating...</span>
+          <span>{t('story').generating}</span>
         </div>
       {/if}
 
@@ -209,13 +210,13 @@
       {#if ui.imageAnalysisInProgress}
         <div
           class="flex items-center gap-1.5 text-sm text-blue-400"
-          title="Analyzing scene for images"
+          title={t('story').analyzing}
         >
           <ImageIcon class="h-3.5 w-3.5 animate-pulse" />
-          <span class="hidden sm:inline">Analyzing...</span>
+          <span class="hidden sm:inline">{t('story').analyzing}</span>
         </div>
       {:else if ui.imagesGenerating > 0}
-        <div class="flex items-center gap-1.5 text-sm text-emerald-400" title="Generating images">
+        <div class="flex items-center gap-1.5 text-sm text-emerald-400" title={t('story').imageGeneration}>
           <ImageIcon class="h-3.5 w-3.5" />
           <span class="hidden sm:inline">
             {ui.imagesGenerating} image{ui.imagesGenerating > 1 ? 's' : ''}
@@ -229,14 +230,14 @@
     {#if story.currentStory}
       <Button
         icon={Library}
-        label="Library"
+        label={t('header').library}
         variant="text"
         class="text-muted-foreground hover:text-primary min-h-11 min-w-11"
         onclick={() => {
           story.closeStory()
           ui.setActivePanel('library')
         }}
-        title="Return to Library"
+        title={t('header').returnToLibrary}
       />
     {/if}
 
@@ -244,11 +245,11 @@
       <!-- Gallery Button -->
       <Button
         icon={ImageIcon}
-        label="Gallery"
+        label={t('header').gallery}
         variant="text"
         class="text-muted-foreground hover:text-primary min-h-11 min-w-11"
         onclick={() => ui.setActivePanel(ui.activePanel === 'gallery' ? 'story' : 'gallery')}
-        title="View generated images"
+        title={t('header').viewGeneratedImages}
       />
 
       <!-- Import / Export Menu -->
@@ -258,16 +259,16 @@
             <Button
               {...props}
               icon={ArrowUpDown}
-              label="Import/Export"
+              label={t('header').importExport}
               endIcon={ChevronDown}
               variant="text"
               class="text-muted-foreground hover:text-primary min-h-[44px] min-w-[44px]"
-              title="Import / Export story"
+              title={t('header').importExportStory}
             />
           {/snippet}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content align="end">
-          <DropdownMenu.Label>Import</DropdownMenu.Label>
+          <DropdownMenu.Label>{t('lorebook').import}</DropdownMenu.Label>
           <DropdownMenu.Item
             onclick={() => {
               showExportMenu = false
@@ -275,21 +276,21 @@
             }}
           >
             <MessageSquare class="text-muted-foreground h-4 w-4" />
-            SillyTavern Chat (.jsonl)
+            {t('export').importSTChat}
           </DropdownMenu.Item>
           <DropdownMenu.Separator />
-          <DropdownMenu.Label>Export</DropdownMenu.Label>
+          <DropdownMenu.Label>{t('lorebook').export}</DropdownMenu.Label>
           <DropdownMenu.Item onclick={() => exportAventuras()}>
             <FileJson class="text-accent-400 h-4 w-4" />
-            Aventuras (.avt)
+            {t('export').aventuras}
           </DropdownMenu.Item>
           <DropdownMenu.Item onclick={() => exportMarkdown()}>
             <FileText class="h-4 w-4 text-blue-400" />
-            Markdown (.md)
+            {t('export').markdown}
           </DropdownMenu.Item>
           <DropdownMenu.Item onclick={() => exportText()}>
             <FileText class="text-muted-foreground h-4 w-4" />
-            Plain Text (.txt)
+            {t('export').plainText}
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
@@ -320,7 +321,7 @@
         rel="noopener noreferrer"
         variant="text"
         class="text-muted-foreground hover:text-primary min-h-[44px] min-w-[44px] sm:hidden"
-        title="Join our Discord community"
+        title={t('header').joinDiscord}
       >
         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
           <path
@@ -333,7 +334,7 @@
     <div class="relative">
       <Button
         icon={Settings}
-        label="Settings"
+        label={t('header').settings}
         variant="text"
         class="text-muted-foreground hover:text-primary min-h-11 min-w-11"
         onclick={() => ui.openSettings()}
@@ -353,7 +354,7 @@
         variant="text"
         class="text-muted-foreground hover:text-primary min-h-11 min-w-11"
         onclick={() => ui.toggleSidebar()}
-        title={ui.sidebarOpen ? 'Hide sidebar' : 'Show sidebar'}
+        title={ui.sidebarOpen ? t('header').hideSidebar : t('header').showSidebar}
       />
     {/if}
   </div>

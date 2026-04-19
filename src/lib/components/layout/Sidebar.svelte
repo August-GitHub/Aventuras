@@ -13,6 +13,7 @@
     Brain,
   } from 'lucide-svelte'
   import CharacterPanel from '$lib/components/world/CharacterPanel.svelte'
+  import { t } from '$lib/i18n'
 
   import LocationPanel from '$lib/components/world/LocationPanel.svelte'
   import InventoryPanel from '$lib/components/world/InventoryPanel.svelte'
@@ -26,12 +27,12 @@
   import { Button } from '$lib/components/ui/button'
 
   const tabs = [
-    { id: 'characters' as const, icon: Users, label: 'Characters' },
-    { id: 'locations' as const, icon: MapPin, label: 'Locations' },
-    { id: 'inventory' as const, icon: Backpack, label: 'Inventory' },
-    { id: 'quests' as const, icon: Scroll, label: 'Quests' },
-    { id: 'time' as const, icon: Clock, label: 'Time' },
-    { id: 'branches' as const, icon: GitBranch, label: 'Branches' },
+    { id: 'characters' as const, icon: Users, label: t('sidebar').characters },
+    { id: 'locations' as const, icon: MapPin, label: t('sidebar').locations },
+    { id: 'inventory' as const, icon: Backpack, label: t('sidebar').inventory },
+    { id: 'quests' as const, icon: Scroll, label: t('sidebar').quests },
+    { id: 'time' as const, icon: Clock, label: t('sidebar').time },
+    { id: 'branches' as const, icon: GitBranch, label: t('sidebar').branches },
   ]
 
   function handleSwipeLeft() {
@@ -119,10 +120,10 @@
         ? '!bg-primary/10 !text-primary'
         : ''}"
       onclick={() => ui.setActivePanel('story')}
-      title="Story"
+      title={t('sidebar').story}
     >
       <BookOpen class="h-4 w-4" />
-      <span>Story</span>
+      <span>{t('sidebar').story}</span>
     </Button>
     <Button
       variant="ghost"
@@ -131,10 +132,10 @@
         ? '!bg-primary/10 !text-primary'
         : ''}"
       onclick={() => ui.setActivePanel('lorebook')}
-      title="Lorebook"
+      title={t('sidebar').lorebook}
     >
       <BookMarked class="h-4 w-4" />
-      <span>Lorebook</span>
+      <span>{t('sidebar').lorebook}</span>
     </Button>
     <Button
       variant="ghost"
@@ -143,10 +144,10 @@
         ? '!bg-primary/10 !text-primary'
         : ''}"
       onclick={() => ui.setActivePanel('memory')}
-      title="Memory"
+      title={t('sidebar').memory}
     >
       <Brain class="h-4 w-4" />
-      <span>Memory</span>
+      <span>{t('sidebar').memory}</span>
     </Button>
   </div>
 </aside>

@@ -18,6 +18,7 @@
     FlaskConical,
     BookOpen,
   } from 'lucide-svelte'
+  import { t } from '$lib/i18n'
 
   import * as ResponsiveModal from '$lib/components/ui/responsive-modal'
   import { Tabs, TabsContent } from '$lib/components/ui/tabs'
@@ -39,16 +40,16 @@
   import StorySettingsTab from './tabs/story-settings.svelte'
 
   const baseTabs = [
-    { id: 'api' as const, label: 'API', icon: Key },
-    { id: 'generation' as const, label: 'Generation', icon: Cpu },
-    { id: 'interface' as const, label: 'Interface', icon: Palette },
-    { id: 'images' as const, label: 'Images', icon: Image },
-    { id: 'tts' as const, label: 'TTS', icon: Volume2 },
-    { id: 'advanced' as const, label: 'Advanced', icon: SettingsIcon },
-    { id: 'experimental' as const, label: 'Labs', icon: FlaskConical },
+    { id: 'api' as const, label: t('settings').api, icon: Key },
+    { id: 'generation' as const, label: t('settings').generation, icon: Cpu },
+    { id: 'interface' as const, label: t('settings').interface, icon: Palette },
+    { id: 'images' as const, label: t('settings').images, icon: Image },
+    { id: 'tts' as const, label: t('settings').tts, icon: Volume2 },
+    { id: 'advanced' as const, label: t('settings').advanced, icon: SettingsIcon },
+    { id: 'experimental' as const, label: t('settings').experimental, icon: FlaskConical },
   ]
 
-  const storyTab = { id: 'story-settings' as const, label: 'Story', icon: BookOpen }
+  const storyTab = { id: 'story-settings' as const, label: t('settings').story, icon: BookOpen }
 
   let tabs = $derived(story.currentStory ? [storyTab, ...baseTabs] : baseTabs)
 
@@ -148,8 +149,8 @@
 
   async function handleResetAll() {
     const confirmed = await ask(
-      'Reset all settings to their default values?\n\nYour API key will be preserved, but all other settings (models, temperatures, prompts, UI preferences) will be reset.\n\nThis cannot be undone.',
-      { title: 'Reset All Settings', kind: 'warning' },
+      t('settings').resetConfirm,
+      { title: t('settings').resetAll, kind: 'warning' },
     )
     if (!confirmed) return
 
@@ -186,10 +187,10 @@
         </div>
         <div class="flex-1 text-center md:text-left">
           <ResponsiveModal.Title class="text-2xl font-semibold sm:text-xl"
-            >Settings</ResponsiveModal.Title
+            >{t('settings').title}</ResponsiveModal.Title
           >
           <p class="text-muted-foreground hidden text-sm md:block">
-            Configure your Aventuras experience
+            {t('settings').description}
           </p>
         </div>
       </div>
@@ -223,10 +224,10 @@
           >
             {#if isResettingSettings}
               <Loader2 class="h-4 w-4 animate-spin" />
-              Resetting...
+              {t('common').loading}
             {:else}
               <RotateCcw class="h-4 w-4" />
-              Reset All
+              {t('settings').resetAll}
             {/if}
           </Button>
         </div>
@@ -275,9 +276,9 @@
                           class="border-destructive/50 flex items-center justify-between rounded-lg border p-4"
                         >
                           <div class="space-y-0.5">
-                            <p class="text-destructive font-medium">Reset All Settings</p>
+                            <p class="text-destructive font-medium">{t('settings').resetAll}</p>
                             <p class="text-muted-foreground text-xs">
-                              Resets all settings to defaults. API key is preserved.
+                              {t('settings').resetDescription}
                             </p>
                           </div>
                           <Button
@@ -288,10 +289,10 @@
                           >
                             {#if isResettingSettings}
                               <Loader2 class="mr-2 h-4 w-4 animate-spin" />
-                              Resetting...
+                              {t('common').loading}
                             {:else}
                               <RotateCcw class="mr-2 h-4 w-4" />
-                              Reset
+                              {t('common').done}
                             {/if}
                           </Button>
                         </div>

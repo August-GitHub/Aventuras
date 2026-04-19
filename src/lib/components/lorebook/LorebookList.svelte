@@ -14,6 +14,7 @@
     Archive,
   } from 'lucide-svelte'
   import LorebookEntryCard from './LorebookEntryCard.svelte'
+  import { t } from '$lib/i18n'
 
   import { Input } from '$lib/components/ui/input'
   import { Button } from '$lib/components/ui/button'

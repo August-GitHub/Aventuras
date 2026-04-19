@@ -16,6 +16,7 @@
   import { quintOut } from 'svelte/easing'
   import { getSupportedLanguages } from '$lib/services/ai/utils/TranslationService'
   import { THEMES } from '../../../themes/themes'
+  import { t } from '$lib/i18n'
 
   import * as Card from '$lib/components/ui/card'
   import { Button } from '$lib/components/ui/button'
@@ -108,7 +109,7 @@
     if (!providerInfo) return
 
     if (providerInfo.requiresKey && !apiKey.trim()) {
-      error = 'Please enter your API key'
+      error = t('errors').apiKeyRequired
       return
     }
 
@@ -120,7 +121,7 @@
       onComplete()
     } catch (e) {
       console.error('Failed to initialize with provider:', e)
-      error = e instanceof Error ? e.message : 'Failed to initialize. Please try again.'
+      error = e instanceof Error ? e.message : t('errors').initializationFailed
     } finally {
       isSubmitting = false
     }
@@ -138,15 +139,15 @@
   out:fade={{ duration: 300 }}
 >
   <div class="mb-8 space-y-2">
-    <h1 class="text-foreground text-4xl font-bold tracking-tight">Welcome to Aventuras</h1>
+    <h1 class="text-foreground text-4xl font-bold tracking-tight">{t('welcome').title}</h1>
     <p class="text-muted-foreground text-lg">
       {#if step === 'interface'}
-        Customize your reading environment
+        {t('welcome').subtitleInterface}
       {:else if step === 'select'}
-        Choose your AI provider to get started
+        {t('welcome').subtitleSelect}
       {:else}
         {@const p = getSelectedProviderInfo()}
-        Configure {p?.name ?? 'Provider'}
+        {t('welcome').subtitleConfigure.replace('{provider}', p?.name ?? 'Provider')}
       {/if}
     </p>
   </div>
@@ -164,7 +165,7 @@
             <div class="space-y-3">
               <Label class="flex items-center gap-2 text-base">
                 <Palette size={18} class="text-primary" />
-                Theme
+                {t('welcome').theme}
               </Label>
               <Select.Root
                 type="single"
@@ -187,7 +188,7 @@
             <div class="space-y-3">
               <Label class="flex items-center gap-2 text-base">
                 <Type size={18} class="text-primary" />
-                Font Size
+                {t('welcome').fontSize}
               </Label>
               <div class="grid grid-cols-3 gap-2">
                 {#each ['small', 'medium', 'large'] as size (size)}
@@ -207,7 +208,7 @@
               <div class="flex items-center justify-between">
                 <Label class="flex items-center gap-2 text-base">
                   <Languages size={18} class="text-primary" />
-                  Translation
+                  {t('welcome').translation}
                 </Label>
                 <Switch
                   checked={settings.translationSettings.enabled}
@@ -221,7 +222,7 @@
                   transition:slide={{ duration: 200, axis: 'y' }}
                 >
                   <div class="space-y-2">
-                    <Label for="lang-select" class="text-sm">Target Language</Label>
+                    <Label for="lang-select" class="text-sm">{t('welcome').targetLanguage}</Label>
                     <Select.Root
                       type="single"
                       value={settings.translationSettings.targetLanguage}
@@ -245,7 +246,7 @@
 
                   <div class="flex items-center justify-between pt-2">
                     <Label class="text-muted-foreground text-sm font-normal"
-                      >Translate my input</Label
+                      >{t('welcome').translateUserInput}</Label
                     >
                     <Switch
                       checked={settings.translationSettings.translateUserInput}
@@ -258,7 +259,7 @@
 
                   <div class="flex items-center justify-between">
                     <Label class="text-muted-foreground text-sm font-normal"
-                      >Translate World State</Label
+                      >{t('welcome').translateWorldState}</Label
                     >
                     <Switch
                       checked={settings.translationSettings.translateWorldState}
@@ -274,7 +275,7 @@
           </Card.Content>
           <Card.Footer>
             <Button class="w-full" size="lg" onclick={goToSelect}>
-              Next Step <ArrowRight class="ml-2 h-4 w-4" />
+              {t('welcome').nextStep} <ArrowRight class="ml-2 h-4 w-4" />
             </Button>
           </Card.Footer>
         </Card.Root>
@@ -312,7 +313,7 @@
             onclick={() => (step = 'interface')}
             class="text-muted-foreground hover:text-foreground"
           >
-            <ArrowLeft size={16} class="mr-2" /> Back to Customization
+            <ArrowLeft size={16} class="mr-2" /> {t('welcome').backToCustomization}
           </Button>
         </div>
       </div>
@@ -328,12 +329,12 @@
           <Card.Root class="bg-card/95 border-border w-full shadow-2xl backdrop-blur-sm">
             <Card.Header>
               <div class="flex items-center gap-4">
-                <Button variant="ghost" size="icon" onclick={goBack} title="Go back">
+                <Button variant="ghost" size="icon" onclick={goBack} title={t('common').back}>
                   <ArrowLeft size={20} />
                 </Button>
                 <div class="flex items-center gap-3">
                   <provider.icon size={24} class={provider.iconColor} />
-                  <Card.Title>Setup</Card.Title>
+                  <Card.Title>{t('welcome').setup}</Card.Title>
                 </div>
               </div>
             </Card.Header>
@@ -341,7 +342,7 @@
               {#if provider.requiresKey}
                 <div class="space-y-2">
                   <div class="flex items-center justify-between">
-                    <Label for="api-key">API Key</Label>
+                    <Label for="api-key">{t('welcome').apiKey}</Label>
                     {#if provider.signupUrl}
                       <a
                         href={provider.signupUrl}
@@ -349,7 +350,7 @@
                         rel="noopener noreferrer"
                         class="text-primary flex items-center gap-1 text-xs hover:underline"
                       >
-                        Get a key <ExternalLink size={10} />
+                        {t('welcome').getKey} <ExternalLink size={10} />
                       </a>
                     {/if}
                   </div>
@@ -397,10 +398,10 @@
                   <div
                     class="border-primary-foreground/30 border-t-primary-foreground mr-2 h-4 w-4 animate-spin rounded-full border-2"
                   ></div>
-                  Setting up...
+                  {t('welcome').settingUp}
                 {:else}
                   <Check class="mr-2 h-4 w-4" />
-                  Get Started
+                  {t('welcome').getStarted}
                 {/if}
               </Button>
             </Card.Content>

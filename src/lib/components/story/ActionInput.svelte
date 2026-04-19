@@ -22,6 +22,7 @@
     ImageIcon,
     Loader2,
   } from 'lucide-svelte'
+  import { t } from '$lib/i18n'
   import Suggestions from './Suggestions.svelte'
   import GrammarCheck from './GrammarCheck.svelte'
   import { Button } from '$lib/components/ui/button'
@@ -134,11 +135,11 @@
     free: PenLine,
   }
   const actionLabels: Record<ActionType, string> = {
-    do: 'Do',
-    say: 'Say',
-    think: 'Think',
-    story: 'Story',
-    free: 'Free',
+    do: '做',
+    say: '说',
+    think: '想',
+    story: '故事',
+    free: '自由',
   }
   const actionBorderColors: Record<ActionType, string> = {
     do: 'border-l-emerald-500',
