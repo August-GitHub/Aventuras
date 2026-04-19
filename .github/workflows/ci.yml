@@ -13,76 +13,6 @@ permissions:
   contents: write
 
 jobs:
-  # build-desktop:
-  #   name: Build Desktop (${{ matrix.artifact_name }})
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       include:
-  #         - platform: ubuntu-22.04
-  #           target: x86_64-unknown-linux-gnu
-  #           artifact_name: linux
-  #         - platform: windows-latest
-  #           target: x86_64-pc-windows-msvc
-  #           artifact_name: windows
-  #         - platform: macos-latest
-  #           target: x86_64-apple-darwin
-  #           artifact_name: macos-intel
-  #         - platform: macos-latest
-  #           target: aarch64-apple-darwin
-  #           artifact_name: macos-arm
-  #
-  #   runs-on: ${{ matrix.platform }}
-  #
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20'
-  #         cache: 'npm'
-  #
-  #     - name: Install Rust
-  #       uses: dtolnay/rust-toolchain@stable
-  #       with:
-  #         targets: ${{ matrix.target }}
-  #
-  #     - name: Rust cache
-  #       uses: swatinem/rust-cache@v2
-  #       with:
-  #         workspaces: './src-tauri -> target'
-  #
-  #     - name: Install Linux dependencies
-  #       if: matrix.platform == 'ubuntu-22.04'
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
-  #
-  #     - name: Install dependencies
-  #       run: npm ci
-  #
-  #     - name: Build and release Tauri app
-  #       uses: tauri-apps/tauri-action@v0
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-  #         TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-  #       with:
-  #         tagName: v__VERSION__
-  #         releaseName: 'Aventura v__VERSION__'
-  #         releaseBody: |
-  #           **Pre-release build**
-  #
-  #           This is a test/preview release. Use at your own risk.
-  #         releaseDraft: false
-  #         prerelease: true
-  #         includeUpdaterJson: false
-  #         updaterJsonPreferNsis: true
-  #         assetNamePattern: '[name]_${{ github.ref_name }}_[arch][setup][ext]'
-  #         args: --target ${{ matrix.target }}
-
   build-android:
     name: Build Android
     runs-on: ubuntu-latest
@@ -102,6 +32,12 @@ jobs:
         with:
           targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
 
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+          cache-key: android-rust-${{ hashFiles('src-tauri/Cargo.lock') }}
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -116,6 +52,18 @@ jobs:
         id: setup-ndk
         with:
           ndk-version: r27
+
+      - name: Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            src-tauri/gen/android/app/.cxx
+            src-tauri/gen/android/app/build
+          key: ${{ runner.os }}-gradle-${{ hashFiles('src-tauri/gen/android/app/**/*.gradle*', 'src-tauri/gen/android/app/**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Install dependencies
         run: npm ci
