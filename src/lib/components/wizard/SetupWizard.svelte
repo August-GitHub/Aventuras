@@ -88,9 +88,13 @@
     <div class="flex flex-col border-b p-4 pb-4">
       <div class="mb-4 flex items-center justify-between">
         <div>
-          <ResponsiveModal.Title class="text-xl">{t('wizard').createNewStory}</ResponsiveModal.Title>
+          <ResponsiveModal.Title class="text-xl">{t('wizard').createNewStory}</ResponsiveModal.Title
+          >
           <ResponsiveModal.Description>
-            {t('wizard').stepOf.replace('{current}', wizard.currentStep.toString()).replace('{total}', wizard.totalSteps.toString())} {stepTitles[wizard.currentStep - 1]}
+            {t('wizard')
+              .stepOf.replace('{current}', wizard.currentStep.toString())
+              .replace('{total}', wizard.totalSteps.toString())}
+            {stepTitles[wizard.currentStep - 1]}
           </ResponsiveModal.Description>
         </div>
       </div>
