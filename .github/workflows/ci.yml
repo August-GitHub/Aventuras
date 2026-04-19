@@ -85,11 +85,8 @@ jobs:
         with:
           targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
 
-      - name: Rust cache
-        uses: swatinem/rust-cache@v2
-        with:
-          workspaces: './src-tauri -> target'
-          cache-key: android-rust-${{ hashFiles('src-tauri/Cargo.lock') }}
+      # 注意：已移除Rust缓存以避免构建产物不一致问题
+      # Rust编译缓存容易导致版本号和代码不同步
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -107,16 +104,16 @@ jobs:
           ndk-version: r27
 
       - name: Gradle cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-            src-tauri/gen/android/app/.cxx
-            src-tauri/gen/android/app/build
-          key: ${{ runner.os }}-gradle-${{ hashFiles('src-tauri/gen/android/app/**/*.gradle*', 'src-tauri/gen/android/app/**/gradle-wrapper.properties') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('src-tauri/gen/android/app/**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+        # 注意：只缓存Gradle依赖和wrapper，不缓存构建产物（.cxx, build）
+        # 构建产物每次应该重新生成以确保一致性
 
       - name: Install dependencies
         run: npm ci

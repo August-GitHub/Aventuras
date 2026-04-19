@@ -312,8 +312,17 @@ export interface TranslationKeys {
   }
 
   wizard: {
-    title: string
-    subtitle: string
+    createNewStory: string
+    stepOf: string
+    chooseMode: string
+    promptPack: string
+    worldSetting: string
+    createCharacter: string
+    supportingCast: string
+    importLorebook: string
+    characterPortraits: string
+    writingStyleTitle: string
+    generateOpening: string
     mode: string
     adventure: string
     creative: string
@@ -335,7 +344,7 @@ export interface TranslationKeys {
     appearance: string
     personality: string
     background: string
-    supportingCast: string
+    supportingCastTitle: string
     portraits: string
     writingStyle: string
     pov: string
@@ -350,7 +359,79 @@ export interface TranslationKeys {
     reviewImport: string
     world: string
     style: string
-    characters: string
+    next: string
+    back: string
+    skip: string
+    optional: string
+    required: string
+    example: string
+    addEntry: string
+    editEntry: string
+    deleteEntry: string
+    import: string
+    export: string
+    search: string
+    filter: string
+    sort: string
+    all: string
+    namePlaceholder: string
+    descriptionPlaceholder: string
+    keywordsPlaceholder: string
+    contentPlaceholder: string
+    male: string
+    female: string
+    other: string
+    firstPerson: string
+    secondPerson: string
+    thirdPerson: string
+    pastTense: string
+    presentTense: string
+    addLorebook: string
+    noLorebook: string
+    selectPack: string
+    noPacks: string
+    loadPacks: string
+    loadingPacks: string
+    packsLoaded: string
+    importStory: string
+    selectFilesToImport: string
+    supportedFormats: string
+    dragDropFiles: string
+    browseFiles: string
+    reviewingImport: string
+    importReady: string
+    startImport: string
+    cancel: string
+    confirm: string
+    warning: string
+    error: string
+    success: string
+    loading: string
+    saving: string
+    saved: string
+    deleted: string
+    updated: string
+    created: string
+    added: string
+    removed: string
+    yes: string
+    no: string
+    close: string
+    minimize: string
+    maximize: string
+    help: string
+    tips: string
+    learnMore: string
+    documentation: string
+    community: string
+    feedback: string
+    reportBug: string
+    requestFeature: string
+    about: string
+    version: string
+    license: string
+    credits: string
+    acknowledgments: string
   }
 
   vault: {

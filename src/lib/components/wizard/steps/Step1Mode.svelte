@@ -2,6 +2,7 @@
   import { Sword, Feather } from 'lucide-svelte'
   import * as Card from '$lib/components/ui/card'
   import type { StoryMode } from '$lib/types'
+  import { t } from '$lib/i18n'
 
   interface Props {
     selectedMode: StoryMode
@@ -12,7 +13,7 @@
 </script>
 
 <div class="space-y-4">
-  <p class="text-muted-foreground">How do you want to experience your story?</p>
+  <p class="text-muted-foreground">{t('wizard').chooseMode}</p>
   <div class="grid gap-4 sm:grid-cols-2">
     <!-- Adventure Mode -->
     <button
@@ -30,13 +31,12 @@
             <div class="bg-primary/10 rounded-lg p-3">
               <Sword class="text-primary h-6 w-6" />
             </div>
-            <Card.Title>Adventure Mode</Card.Title>
+            <Card.Title>{t('wizard').adventure}</Card.Title>
           </div>
         </Card.Header>
         <Card.Content>
           <p class="text-muted-foreground text-sm">
-            <strong>You are the protagonist.</strong> Explore the world, interact with characters, and
-            make choices that shape your story. The AI narrates the consequences of your actions.
+            {t('wizard').adventureDesc}
           </p>
         </Card.Content>
       </Card.Root>
@@ -58,13 +58,12 @@
             <div class="bg-primary/10 rounded-lg p-3">
               <Feather class="text-primary h-6 w-6" />
             </div>
-            <Card.Title>Creative Writing</Card.Title>
+            <Card.Title>{t('wizard').creative}</Card.Title>
           </div>
         </Card.Header>
         <Card.Content>
           <p class="text-muted-foreground text-sm">
-            <strong>You are the author.</strong> Direct the story and craft the narrative. The AI collaborates
-            with you to write prose following your creative vision.
+            {t('wizard').creativeDesc}
           </p>
         </Card.Content>
       </Card.Root>

@@ -8,6 +8,7 @@
   import { characterVault } from '$lib/stores/characterVault.svelte'
   import { hasRequiredCredentials } from '$lib/services/ai/image'
   import type { VaultCharacter } from '$lib/types'
+  import { t } from '$lib/i18n'
 
   // Step components
   import {
@@ -60,15 +61,15 @@
 
   // Step Titles
   const stepTitles = [
-    'Choose Your Mode',
-    'Prompt Pack',
-    'World & Setting',
-    'Create Your Character',
-    'Supporting Cast (Optional)',
-    'Import Lorebook (Optional)',
-    'Character Portraits (Optional)',
-    'Writing Style',
-    'Generate Opening',
+    t('wizard').chooseMode,
+    t('wizard').promptPack,
+    t('wizard').worldSetting,
+    t('wizard').createCharacter,
+    t('wizard').supportingCast,
+    t('wizard').importLorebook,
+    t('wizard').characterPortraits,
+    t('wizard').writingStyleTitle,
+    t('wizard').generateOpening,
   ]
 
   // Load packs when entering step 2
@@ -87,9 +88,9 @@
     <div class="flex flex-col border-b p-4 pb-4">
       <div class="mb-4 flex items-center justify-between">
         <div>
-          <ResponsiveModal.Title class="text-xl">Create New Story</ResponsiveModal.Title>
+          <ResponsiveModal.Title class="text-xl">{t('wizard').createNewStory}</ResponsiveModal.Title>
           <ResponsiveModal.Description>
-            Step {wizard.currentStep} of {wizard.totalSteps}: {stepTitles[wizard.currentStep - 1]}
+            {t('wizard').stepOf.replace('{current}', wizard.currentStep.toString()).replace('{total}', wizard.totalSteps.toString())} {stepTitles[wizard.currentStep - 1]}
           </ResponsiveModal.Description>
         </div>
       </div>
@@ -422,7 +423,7 @@
       {#if wizard.currentStep > 1}
         <Button variant="secondary" class="gap-1 pl-2" onclick={() => wizard.prevStep()}>
           <ChevronLeft class="h-4 w-4" />
-          Back
+          {t('wizard').back}
         </Button>
       {:else}
         <div></div>
@@ -442,7 +443,7 @@
               !wizard.character.cardImportedFirstMessage)}
         >
           <Play class="h-4 w-4" />
-          Begin Story
+          {t('wizard').createStory}
         </Button>
       {:else}
         <Button
@@ -451,7 +452,7 @@
           onclick={() => wizard.nextStep()}
           disabled={!wizard.canProceed()}
         >
-          Next
+          {t('wizard').next}
           <ChevronRight class="h-4 w-4" />
         </Button>
       {/if}

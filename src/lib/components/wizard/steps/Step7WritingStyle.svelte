@@ -2,6 +2,7 @@
   import WritingStyleFields from '$lib/components/shared/WritingStyleFields.svelte'
   import { ScrollArea } from '$lib/components/ui/scroll-area'
   import type { POV, Tense } from '$lib/types'
+  import { t } from '$lib/i18n'
 
   interface Props {
     selectedPOV: POV
@@ -36,7 +37,7 @@
     onVisualProseModeChange,
     onImageGenerationModeChange,
     onBackgroundImagesEnabledChange,
-    onReferenceModeChange,
+    onReferenceMode,
   }: Props = $props()
 
   // Force "none" mode when image generation is disabled (wizard only)
@@ -50,9 +51,9 @@
 <div class="flex h-full flex-col gap-4 p-1">
   <div class="flex items-center justify-between">
     <div>
-      <h3 class="text-lg font-bold tracking-tight">Writing Style</h3>
+      <h3 class="text-lg font-bold tracking-tight">{t('wizard').writingStyleTitle}</h3>
       <p class="text-muted-foreground">
-        Choose a narrative voice and configure the AI's writing style.
+        {t('wizard').chooseMode}
       </p>
     </div>
   </div>
@@ -73,7 +74,7 @@
       {onVisualProseModeChange}
       {onImageGenerationModeChange}
       {onBackgroundImagesEnabledChange}
-      {onReferenceModeChange}
+      {onReferenceMode}
     />
   </ScrollArea>
 </div>
