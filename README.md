@@ -236,6 +236,110 @@ apksigner sign --ks release.keystore --ks-key-alias myalias --out app-release.ap
 
 </details>
 
+## GitHub Actions CI/CD
+
+### Overview
+
+This project uses GitHub Actions for automated builds and releases. The following workflows are configured:
+
+| Workflow | Trigger | Description |
+|----------|---------|-------------|
+| `ci.yml` | Push to `v*-pre*` tags | Pre-release builds (development/testing) |
+| `release.yml` | Push to `vX.X.X` tags | Stable release builds |
+| `lint-and-typecheck.yml` | Push/pull requests | Code quality checks |
+
+### Build Matrix
+
+#### Desktop Builds
+- **Windows**: `x86_64-pc-windows-msvc`
+- **macOS Intel**: `x86_64-apple-darwin`
+- **macOS ARM**: `aarch64-apple-darwin`
+- **Linux**: `x86_64-unknown-linux-gnu`
+
+#### Android Builds
+- **Universal APK**: All ABIs (arm64-v8a, armeabi-v7a, x86, x86_64)
+
+### Environment Variables (Secrets)
+
+The following secrets must be configured in GitHub repository settings:
+
+| Secret | Description | Required |
+|--------|-------------|----------|
+| `GITHUB_TOKEN` | Automatic token for GitHub API access | ✅ |
+| `TAURI_SIGNING_PRIVATE_KEY` | Tauri signing key for desktop apps | Optional |
+| `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` | Password for signing key | Optional |
+| `ANDROID_KEYSTORE_BASE64` | Base64-encoded keystore for APK signing | ✅ (for release) |
+| `ANDROID_KEYSTORE_PASSWORD` | Keystore password | ✅ |
+| `ANDROID_KEY_ALIAS` | Key alias in keystore | ✅ |
+| `ANDROID_KEY_PASSWORD` | Key password | ✅ |
+
+### Creating Android Keystore
+
+```bash
+# Generate keystore
+keytool -genkey -v -keystore aventura-release.keystore \
+  -alias aventuras -keyalg RSA -keysize 2048 -validity 10000
+
+# Encode to base64 for GitHub secrets
+base64 aventura-release.keystore > keystore-base64.txt
+```
+
+### Triggering Builds
+
+#### Pre-release (Development)
+```bash
+git tag v0.7.0-pre.1
+git push origin v0.7.0-pre.1
+```
+
+#### Stable Release
+```bash
+git tag v0.7.0
+git push origin v0.7.0
+```
+
+#### Manual Trigger
+All workflows can be triggered manually via the GitHub Actions UI with optional parameters.
+
+### Artifact Outputs
+
+| Platform | Artifact Name | Location |
+|----------|---------------|----------|
+| Windows | `aventuras_vX.X.X_x64-setup.exe` | Release assets |
+| macOS | `aventuras_vX.X.X_x64.dmg` | Release assets |
+| Linux | `aventuras_vX.X.X_amd64.deb` | Release assets |
+| Android | `aventura-release.apk` | Release assets |
+
+### Workflow Details
+
+#### `release.yml` (Stable Releases)
+1. **Checkout**: Pulls latest code
+2. **Setup Node.js**: Installs Node 20 with npm cache
+3. **Install Rust**: Installs stable toolchain with target-specific components
+4. **Install Dependencies**: Runs `npm ci`
+5. **Build Desktop**: Uses Tauri action to build and upload artifacts
+6. **Build Android**: 
+   - Sets up Java 17
+   - Configures Android SDK and NDK r27
+   - Builds unsigned APK
+   - Signs APK with keystore
+   - Uploads to release
+
+#### `ci.yml` (Pre-releases)
+- Similar to release workflow but:
+- Creates pre-release tagged releases
+- Skips some signing steps for faster builds
+- Does not include updater JSON files
+
+### Localization Support
+
+The application supports multiple languages via an internal i18n system:
+
+- **Default Language**: Chinese (zh-CN)
+- **Fallback Language**: English (en-US)
+- **Technical Terms**: Preserved in English (e.g., `token`, `API key`, `OpenRouter`)
+- **Product Names**: Preserved in English (e.g., `Aventuras`)
+
 ## Acknowledgments
 
 - [Tauri](https://tauri.app/) - Desktop/mobile app framework
