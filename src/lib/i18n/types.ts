@@ -115,6 +115,56 @@ export interface TranslationKeys {
     goToBottom: string
     scrollToFirst: string
     scrollToBottom: string
+    actionPlaceholder: string
+    creativePlaceholder: string
+    manualImageGeneration: string
+    generatingImage: string
+    noSuggestions: string
+    loadingSuggestions: string
+    actionChoices: string
+    loadingChoices: string
+    libraryTitle: string
+    libraryDescription: string
+    noStories: string
+    createFirstStory: string
+    grammarCheck: string
+    checkingGrammar: string
+    grammarCorrected: string
+    streamingEntry: string
+    storyCard: string
+    lastPlayed: string
+    playTime: string
+    reasoningBlock: string
+    reasoning: string
+    showReasoning: string
+    hideReasoning: string
+    entryActions: string
+    regenerateEntry: string
+    deleteEntry: string
+    copyText: string
+    editEntry: string
+    gallery: {
+      title: string
+      allImages: string
+      storyImages: string
+      portraits: string
+      backgrounds: string
+      loading: string
+      empty: string
+      downloadAll: string
+      selectAll: string
+      deselectAll: string
+      viewMode: string
+      gridView: string
+      listView: string
+      sortBy: string
+      dateAsc: string
+      dateDesc: string
+      sizeAsc: string
+      sizeDesc: string
+      nameAsc: string
+      nameDesc: string
+    }
   }
 
   settings: {
@@ -148,6 +198,155 @@ export interface TranslationKeys {
     wordCount: string
     darkMode: string
     accessibility: string
+    apiConnection: {
+      profiles: string
+      addProfile: string
+      newProfile: string
+      profileName: string
+      fallback: string
+      mobileFallback: string
+      setFallback: string
+      saving: string
+      saved: string
+      noProfiles: string
+      noProfilesDescription: string
+      addFirstProfile: string
+      selfHostedUrl: string
+      selfHostedOptional: string
+      fetchModels: string
+      fetchingModels: string
+      modelsFetched: string
+      customModels: string
+      hiddenModels: string
+      showHidden: string
+      hideHidden: string
+      providerType: string
+      providersWithoutServices: string
+      baseUrl: string
+      baseUrlPlaceholder: string
+      modelFilter: string
+      modelFilterPlaceholder: string
+    }
+    generationTab: {
+      globalSettings: string
+      requestTimeout: string
+      timeoutDescription: string
+      timeoutSeconds: string
+      minTimeout: string
+      maxTimeout: string
+    }
+    interfaceTab: {
+      themeSelection: string
+      themeDescription: string
+      fontSize: string
+      fontSizeDescription: string
+      storyWidth: string
+      storyWidthDescription: string
+      showWordCount: string
+      showWordCountDescription: string
+      spellcheck: string
+      spellcheckDescription: string
+      customDictionary: string
+      customDictionaryDescription: string
+      enableSuggestions: string
+      enableSuggestionsDescription: string
+      actionPrefixes: string
+      actionPrefixesDescription: string
+      reasoningBlock: string
+      reasoningBlockDescription: string
+      autoScroll: string
+      autoScrollDescription: string
+      scrollToTop: string
+      scrollToTopDescription: string
+      scrollToBottom: string
+      scrollToBottomDescription: string
+      translation: string
+      translationDescription: string
+      enableTranslation: string
+      enableTranslationDescription: string
+      targetLanguage: string
+      translateNarration: string
+      translateNarrationDescription: string
+      translateUserInput: string
+      translateUserInputDescription: string
+      translateWorldState: string
+      translateWorldStateDescription: string
+      updates: string
+      checkForUpdates: string
+      checkForUpdatesDescription: string
+      checkOnStartup: string
+      checkOnStartupDescription: string
+      autoDownloadUpdates: string
+      autoDownloadUpdatesDescription: string
+    }
+    imagesTab: {
+      profiles: string
+      addProfile: string
+      createProfile: string
+      noProfiles: string
+      noProfilesDescription: string
+      profileInfo: string
+      selectStoryProfile: string
+      selectRegularProfile: string
+      selectReferenceProfile: string
+      imageStyle: string
+      maxImagesPerMessage: string
+      characterPortraitProfile: string
+      characterPortraitStyle: string
+      backgroundProfile: string
+      backgroundBlur: string
+      testing: string
+      testProfile: string
+      testPrompt: string
+      testSize: string
+      generateTestImage: string
+    }
+    storySettings: {
+      header: string
+      description: string
+    }
+    tts: {
+      enableTTS: string
+      enableTTSDescription: string
+      provider: string
+      providerDescription: string
+      openAICompatible: string
+      openAICompatibleDescription: string
+      systemVoice: string
+      systemVoiceDescription: string
+      googleTranslateLanguage: string
+      googleTranslateLanguageDescription: string
+      voicePreview: string
+      voicePreviewDescription: string
+      volumeOverride: string
+      volumeOverrideDescription: string
+      speechSpeed: string
+      speechSpeedDescription: string
+      autoPlayNarration: string
+      autoPlayNarrationDescription: string
+      excludedCharacters: string
+      excludedCharactersDescription: string
+      removeHtmlTags: string
+      removeHtmlTagsDescription: string
+    }
+    agentProfiles: {
+      header: string
+      description: string
+      structuredOutput: string
+      thinkingNudge: string
+      requestBody: string
+    }
+    advanced: {
+      header: string
+      description: string
+      lorebookImport: string
+      loreManagement: string
+      worldStateClassifier: string
+      entryRetrieval: string
+      memoryRetrieval: string
+      contextWindow: string
+      lorebookLimits: string
+    }
   }
 
   lorebook: {
@@ -191,6 +390,13 @@ export interface TranslationKeys {
     creativeState: string
     blacklisted: string
     createdBy: string
+    manageVault: string
+    importedEntries: string
+    clearAll: string
+    warnings: string
+    preview: string
+    totalImported: string
+    loadFromVault: string
   }
 
   memory: {
@@ -264,6 +470,115 @@ export interface TranslationKeys {
     minute: string
     timeAdvance: string
     timePassed: string
+    characterPanel: {
+      title: string
+      addCharacter: string
+      editCharacter: string
+      swapCharacter: string
+      details: string
+      name: string
+      gender: string
+      age: string
+      appearance: string
+      personality: string
+      background: string
+      relationships: string
+      tags: string
+      portrait: string
+      uploadPortrait: string
+      generatePortrait: string
+      saveChanges: string
+      cancelEdit: string
+      confirmDelete: string
+      noCharacters: string
+      noCharactersDescription: string
+      addFirstCharacter: string
+      currentCharacter: string
+      supportingCast: string
+    }
+    locationPanel: {
+      title: string
+      addLocation: string
+      editLocation: string
+      details: string
+      name: string
+      description: string
+      tags: string
+      currentLocation: string
+      locations: string
+      noLocations: string
+      noLocationsDescription: string
+      addFirstLocation: string
+    }
+    inventoryPanel: {
+      title: string
+      addItem: string
+      editItem: string
+      equippedItems: string
+      backpack: string
+      worldItems: string
+      details: string
+      name: string
+      quantity: string
+      description: string
+      tags: string
+      equip: string
+      unequip: string
+      drop: string
+      noItems: string
+      noItemsDescription: string
+      addFirstItem: string
+    }
+    questPanel: {
+      title: string
+      addQuest: string
+      editQuest: string
+      activeQuests: string
+      questHistory: string
+      details: string
+      name: string
+      description: string
+      objectives: string
+      rewards: string
+      status: string
+      completed: string
+      inProgress: string
+      failed: string
+      noQuests: string
+      noQuestsDescription: string
+      addFirstQuest: string
+    }
+    timePanel: {
+      title: string
+      currentTime: string
+      advanceTime: string
+      year: string
+      day: string
+      hour: string
+      minute: string
+      format: string
+      twelveHour: string
+      twentyFourHour: string
+    }
+    runtimeVariable: {
+      display: string
+      editor: string
+      name: string
+      value: string
+      type: string
+      boolean: string
+      number: string
+      text: string
+      enum: string
+      array: string
+      object: string
+      noVariables: string
+      addVariable: string
+      editVariable: string
+      deleteVariable: string
+      saveVariable: string
+      cancelEdit: string
+    }
   }
 
   export: {
@@ -297,6 +612,28 @@ export interface TranslationKeys {
     loreManagementComplete: string
     syncConnected: string
     syncDisconnected: string
+    profileCreated: string
+    profileUpdated: string
+    profileDeleted: string
+    imageGenerated: string
+    imageGenerationFailed: string
+    changesSaved: string
+    characterAdded: string
+    characterUpdated: string
+    characterDeleted: string
+    locationAdded: string
+    locationUpdated: string
+    locationDeleted: string
+    itemAdded: string
+    itemUpdated: string
+    itemDeleted: string
+    questAdded: string
+    questUpdated: string
+    questDeleted: string
+    timeUpdated: string
+    variableAdded: string
+    variableUpdated: string
+    variableDeleted: string
   }
 
   errors: {
@@ -309,6 +646,16 @@ export interface TranslationKeys {
     invalidFormat: string
     notFound: string
     permissionDenied: string
+    worldSettingMissing: string
+    characterRequired: string
+    locationRequired: string
+    itemRequired: string
+    questRequired: string
+    invalidValue: string
+    connectionFailed: string
+    serverError: string
+    timeout: string
+    unknownError: string
   }
 
   wizard: {
@@ -432,6 +779,128 @@ export interface TranslationKeys {
     license: string
     credits: string
     acknowledgments: string
+    step2: {
+      title: string
+      description: string
+      manageVault: string
+      importedEntries: string
+      clearAll: string
+      warnings: string
+      preview: string
+      totalImported: string
+      importWarnings: string
+      loadFromVault: string
+    }
+    step3: {
+      title: string
+      loadFromVault: string
+      manageVault: string
+      selectedScenario: string
+      chooseScenario: string
+      scenarioDescription: string
+      quickStartTemplates: string
+      genrePlaceholder: string
+      worldDescriptionPlaceholder: string
+      userReplacementNote: string
+      expandWithAI: string
+      useDescription: string
+      aiGuidancePlaceholder: string
+      generateExpandedWorld: string
+      importedNpcs: string
+      activeSetting: string
+      savedToVault: string
+      save: string
+      done: string
+      edit: string
+      locations: string
+      themes: string
+      refinementNotes: string
+      refineWithAI: string
+    }
+    step4: {
+      title: string
+      worldSettingAlert: string
+      worldSettingAlertDescription: string
+      loadFromVault: string
+      manageVault: string
+      selectedCharacter: string
+      chooseCharacter: string
+      characterDescription: string
+      createOrEdit: string
+      createOrEditDescription: string
+      expandWithAI: string
+      aiGuidancePlaceholder: string
+      expandDetails: string
+      generateNew: string
+      saveChanges: string
+    }
+    step5: {
+      title: string
+      description: string
+      loadFromVault: string
+      manageVault: string
+      charactersAdded: string
+      addingFromVault: string
+      vaultDescription: string
+      createNewCharacter: string
+      generateWithAI: string
+      createOrEdit: string
+      updateOrAdd: string
+    }
+    step6: {
+      title: string
+      description: string
+      protagonist: string
+      appearanceDescriptors: string
+      upload: string
+      generate: string
+      regenerate: string
+      role: string
+      supportingAppearance: string
+      supportingUpload: string
+      supportingGenerate: string
+      supportingRegenerate: string
+    }
+    step8: {
+      title: string
+      description: string
+      importedOpening: string
+      clear: string
+      defaultOpening: string
+      alternateOpenings: string
+      useThisOpening: string
+      manualOpening: string
+      openingPlaceholder: string
+      expandWithAI: string
+      generateWithAI: string
+      clearAIGenerated: string
+      generatedOpening: string
+      edit: string
+      refineFurther: string
+      saveChanges: string
+      summary: {
+        mode: string
+        genre: string
+        pov: string
+        tense: string
+        setting: string
+        protagonist: string
+        lorebookEntries: string
+      }
+    }
+    packSelection: {
+      title: string
+      description: string
+      selectedPack: string
+      defaultPack: string
+      variables: string
+      booleanInput: string
+      textInput: string
+      textAreaInput: string
+      numberInput: string
+      enumInput: string
+      selectOption: string
+    }
   }
 
   vault: {
@@ -490,6 +959,44 @@ export interface TranslationKeys {
     sync: string
     backup: string
     restore: string
+    prompts: {
+      title: string
+      templateEditor: string
+      templateGroupList: string
+      promptPackList: string
+      promptPackCard: string
+      promptPackEditor: string
+      variablePalette: string
+      variableManager: string
+      variableCard: string
+      testVariables: string
+      templatePreview: string
+      colorPicker: string
+      iconPicker: string
+      createPackDialog: string
+      importPreviewDialog: string
+      runtimeVariableManager: string
+      runtimeVariableCard: string
+    }
+    scenarios: {
+      editor: string
+      formFields: string
+      entityEditPanel: string
+      lorebookFields: string
+      lorebookEditor: string
+      lorebookEditorContent: string
+      characterForm: string
+      characterFormFields: string
+      diffView: string
+      pendingOperations: string
+      interactiveAssistant: string
+      universalCard: string
+      universalBrowser: string
+      tagFilter: string
+      card: string
+      listItem: string
+      browser: string
+    }
   }
 
   sync: {
@@ -533,5 +1040,25 @@ export interface TranslationKeys {
     network: string
     performance: string
     profiling: string
+  }
+
+  discovery: {
+    title: string
+    card: string
+    cardDetails: string
+    modal: string
+  }
+
+  layout: {
+    appShell: string
+    profileWarningBanner: string
+  }
+
+  modals: {
+    stChatImport: string
+  }
+
+  branch: {
+    panel: string
   }
 }
