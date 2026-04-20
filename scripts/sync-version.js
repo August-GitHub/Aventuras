@@ -3,7 +3,7 @@
 /**
  * Version Sync Script
  * Automatically syncs version numbers across package.json, Cargo.toml, and tauri.conf.json
- * 
+ *
  * Usage:
  *   node scripts/sync-version.js
  *   node scripts/sync-version.js --bump <version>
@@ -71,25 +71,25 @@ function syncVersions() {
   }
 
   console.log('\n❌ Versions are not synchronized!')
-  
+
   const mainVersion = pkgVersion || cargoVersion || tauriVersion
-  
+
   console.log(`\nSyncing all files to version: ${mainVersion}`)
-  
+
   updatePackageJsonVersion(mainVersion)
   updateCargoTomlVersion(mainVersion)
   updateTauriConfVersion(mainVersion)
-  
+
   console.log('✅ All versions synchronized successfully!')
 }
 
 function bumpVersion(newVersion) {
   console.log(`Bumping version to: ${newVersion}`)
-  
+
   updatePackageJsonVersion(newVersion)
   updateCargoTomlVersion(newVersion)
   updateTauriConfVersion(newVersion)
-  
+
   console.log('✅ Version bumped successfully!')
 }
 
