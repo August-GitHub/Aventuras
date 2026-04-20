@@ -215,10 +215,14 @@
   <!-- API Key -->
   <Input
     label={isSelfHostedUrl(baseUrl) ? 'API Key (optional)' : 'API Key'}
-    type="password"
+    type="text"
     placeholder="sk-..."
     bind:value={apiKey}
     class="font-mono text-xs"
+    autocomplete="off"
+    autocapitalize="off"
+    autocorrect="off"
+    spellcheck="false"
   />
 
   <!-- Models Section -->

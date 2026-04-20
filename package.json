@@ -11,8 +11,9 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "tauri": "tauri",
     "release": "node scripts/release.js",
-    "release:auto": "standard-version",
-    "release:pre": "standard-version --prerelease pre",
+    "release:auto": "standard-version && npm run sync-version",
+    "release:pre": "standard-version --prerelease pre && npm run sync-version",
+    "sync-version": "node scripts/sync-version.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,js,svelte,json,css,html}\""
