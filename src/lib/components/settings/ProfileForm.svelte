@@ -23,6 +23,7 @@
     Star,
   } from 'lucide-svelte'
   import X from '@lucide/svelte/icons/x'
+  import { t } from '$lib/i18n'
 
   interface Props {
     // Form fields (bindable)
@@ -159,7 +160,7 @@
 
 <div class="space-y-3">
   <!-- Profile Name -->
-  <Input label="Profile Name" placeholder="e.g., OpenRouter, My Local LLM" bind:value={name} />
+  <Input label={t('settings').apiConnection.profileName} placeholder="e.g., OpenRouter, My Local LLM" bind:value={name} />
 
   <!-- Provider Type -->
   <ProviderTypeSelector value={providerType} onchange={handleProviderTypeChange} />
@@ -169,8 +170,7 @@
     <Alert class="border-yellow-500/50 bg-yellow-500/10">
       <AlertCircle class="h-4 w-4 text-yellow-500" />
       <AlertDescription class="text-xs">
-        This provider requires manual model configuration. Go to the <strong>Generation</strong> tab to
-        set models for each service.
+        {t('settings').apiConnection.providersWithoutServices}
       </AlertDescription>
     </Alert>
   {/if}
@@ -179,10 +179,10 @@
   {#if providerType === 'openai-compatible'}
     <div class="space-y-2">
       <Label>
-        Base URL <span class="text-muted-foreground">(required)</span>
+        {t('settings').apiConnection.baseUrl} <span class="text-muted-foreground">({t('common').required})</span>
       </Label>
       <Input
-        placeholder="https://api.example.com/v1"
+        placeholder={t('settings').apiConnection.baseUrlPlaceholder}
         bind:value={baseUrl}
         class="font-mono text-xs"
       />
@@ -198,23 +198,23 @@
             ? 'rotate-90'
             : ''}"
         />
-        Custom Base URL
-        <span class="text-muted-foreground">(optional)</span>
+        {t('settings').apiConnection.selfHostedUrl}
+        <span class="text-muted-foreground">({t('common').optional})</span>
       </button>
       {#if showBaseUrlCollapsible || baseUrl}
         <Input
-          placeholder={PROVIDERS[providerType].baseUrl || 'https://api.example.com/v1'}
+          placeholder={PROVIDERS[providerType].baseUrl || t('settings').apiConnection.baseUrlPlaceholder}
           bind:value={baseUrl}
           class="font-mono text-xs"
         />
-        <p class="text-muted-foreground text-xs">Leave empty for default endpoint.</p>
+        <p class="text-muted-foreground text-xs">{t('settings').apiConnection.selfHostedOptional}</p>
       {/if}
     </div>
   {/if}
 
   <!-- API Key -->
   <Input
-    label={isSelfHostedUrl(baseUrl) ? 'API Key (optional)' : 'API Key'}
+    label={isSelfHostedUrl(baseUrl) ? `${t('settings').apiKey} (${t('common').optional})` : t('settings').apiKey}
     type="text"
     placeholder="sk-..."
     bind:value={apiKey}
@@ -230,7 +230,7 @@
     <div class="flex items-center justify-between">
       <Label class="flex items-center gap-2">
         <Box class="h-4 w-4" />
-        Models
+        {t('settings').model}
       </Label>
       <div class="flex gap-2">
         <Button

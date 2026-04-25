@@ -17,6 +17,7 @@
   import { getSupportedLanguages } from '$lib/services/ai/utils/TranslationService'
   import { updaterService } from '$lib/services/updater'
   import { RefreshCw, Loader2, Languages, Plus, X, Trash2 } from 'lucide-svelte'
+  import { t } from '$lib/i18n'
 
   const storyWidthIndex = $derived(
     Math.max(
@@ -152,14 +153,14 @@
 <div class="space-y-4">
   <!-- Theme Selection -->
   <div>
-    <Label class="mb-2 block">Theme</Label>
+    <Label class="mb-2 block">{t('settings').interfaceTab.themeSelection}</Label>
     <Select.Root
       type="single"
       value={settings.uiSettings.theme}
       onValueChange={(v) => settings.setTheme(v)}
     >
       <Select.Trigger class="h-10 w-full">
-        {THEMES.find((t) => t.id === settings.uiSettings.theme)?.label ?? 'Select theme'}
+        {THEMES.find((t) => t.id === settings.uiSettings.theme)?.label ?? t('common').select}
       </Select.Trigger>
       <Select.Content>
         {#each THEMES as theme (theme.id)}
@@ -176,14 +177,14 @@
 
   <!-- Font Size -->
   <div>
-    <Label class="mb-2 block">Font Size</Label>
+    <Label class="mb-2 block">{t('settings').interfaceTab.fontSize}</Label>
     <Select.Root
       type="single"
       value={settings.uiSettings.fontSize}
       onValueChange={(v) => settings.setFontSize(v as 'small' | 'medium' | 'large')}
     >
       <Select.Trigger class="h-10 w-full">
-        {fontSizes.find((s) => s.value === settings.uiSettings.fontSize)?.label ?? 'Select size'}
+        {fontSizes.find((s) => s.value === settings.uiSettings.fontSize)?.label ?? t('common').select}
       </Select.Trigger>
       <Select.Content>
         {#each fontSizes as size (size.value)}
@@ -198,13 +199,13 @@
   <!-- Story Content Width -->
   <div class="space-y-2">
     <div class="flex items-center justify-between">
-      <Label>Story Content Width</Label>
+      <Label>{t('settings').interfaceTab.storyWidth}</Label>
       <span class="text-muted-foreground text-sm">
-        {STORY_WIDTH_OPTIONS[storyWidthIndex]?.label ?? 'Default'}
+        {STORY_WIDTH_OPTIONS[storyWidthIndex]?.label ?? t('common').default}
       </span>
     </div>
     <p class="text-muted-foreground text-xs">
-      Max width of the story area — applies to text and inline images
+      {t('settings').interfaceTab.storyWidthDescription}
     </p>
     <Slider
       type="single"
@@ -223,9 +224,9 @@
   <!-- Word Count Toggle -->
   <div class="flex items-center justify-between">
     <div>
-      <Label>Word Count</Label>
+      <Label>{t('settings').interfaceTab.showWordCount}</Label>
       <p class="text-muted-foreground text-xs">
-        Display current story word count in the status bar
+        {t('settings').interfaceTab.showWordCountDescription}
       </p>
     </div>
     <Switch
@@ -240,8 +241,8 @@
   <!-- Spellcheck Toggle -->
   <div class="flex items-center justify-between">
     <div>
-      <Label>Spellcheck</Label>
-      <p class="text-muted-foreground text-xs">Grammar and spelling suggestions while typing</p>
+      <Label>{t('settings').interfaceTab.spellcheck}</Label>
+      <p class="text-muted-foreground text-xs">{t('settings').interfaceTab.spellcheckDescription}</p>
     </div>
     <Switch
       checked={settings.uiSettings.spellcheckEnabled}

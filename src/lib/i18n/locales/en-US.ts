@@ -39,6 +39,11 @@ export const enUS: TranslationKeys = {
     disabled: 'Disabled',
     on: 'On',
     off: 'Off',
+    select: 'Select',
+    default: 'Default',
+    required: 'Required',
+    optional: 'Optional',
+    models: 'models',
   },
 
   header: {

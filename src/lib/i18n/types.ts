@@ -39,6 +39,11 @@ export interface TranslationKeys {
     disabled: string
     on: string
     off: string
+    select: string
+    default: string
+    required: string
+    optional: string
+    models: string
   }
 
   header: {
@@ -174,8 +179,6 @@ export interface TranslationKeys {
     generation: string
     interface: string
     images: string
-    tts: string
-    advanced: string
     experimental: string
     story: string
     resetAll: string

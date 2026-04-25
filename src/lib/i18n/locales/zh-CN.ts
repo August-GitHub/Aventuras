@@ -39,6 +39,11 @@ export const zhCN: TranslationKeys = {
     disabled: '禁用',
     on: '开',
     off: '关',
+    select: '选择',
+    default: '默认',
+    required: '必填',
+    optional: '可选',
+    models: '模型',
   },
 
   header: {
@@ -174,7 +179,6 @@ export const zhCN: TranslationKeys = {
     generation: '生成',
     interface: '界面',
     images: '图片',
-    advanced: '高级',
     experimental: '实验室',
     story: '故事',
     resetAll: '重置全部',

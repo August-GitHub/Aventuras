@@ -2,6 +2,7 @@
   import MainNarrative from '../MainNarrative.svelte'
   import AgentProfiles from '../AgentProfiles.svelte'
   import { settings } from '$lib/stores/settings.svelte'
+  import { t } from '$lib/i18n'
   import {
     Card,
     CardContent,
@@ -38,17 +39,17 @@
   <!-- Global API Settings -->
   <Card>
     <CardHeader>
-      <CardTitle>Global API Settings</CardTitle>
-      <CardDescription>Settings that apply to all API requests</CardDescription>
+      <CardTitle>{t('settings').generationTab.globalSettings}</CardTitle>
+      <CardDescription>{t('settings').generationTab.timeoutDescription}</CardDescription>
     </CardHeader>
     <CardContent class="space-y-4">
       <!-- Request Timeout -->
       <div class="space-y-4">
         <div class="flex items-center justify-between">
           <div class="space-y-1">
-            <Label>Request Timeout</Label>
+            <Label>{t('settings').generationTab.requestTimeout}</Label>
             <p class="text-muted-foreground text-xs">
-              Maximum time to wait for any LLM response (applies to all services)
+              {t('settings').generationTab.timeoutDescription}
             </p>
           </div>
           <span class="text-muted-foreground text-xs font-medium">

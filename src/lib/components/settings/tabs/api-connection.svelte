@@ -6,6 +6,7 @@
   import { fetchModelsFromProvider } from '$lib/services/ai/sdk/providers'
   import { PROVIDERS } from '$lib/services/ai/sdk/providers/config'
   import { Plus, Check, ChevronRight, Key as KeyIcon, Star } from 'lucide-svelte'
+  import { t } from '$lib/i18n'
 
   import { Button } from '$lib/components/ui/button'
   import { Card, CardContent } from '$lib/components/ui/card'
@@ -265,12 +266,12 @@
   <div>
     <div class="flex items-center justify-between">
       <div>
-        <h3 class="text-lg font-semibold">API Profiles</h3>
-        <p class="text-muted-foreground text-sm">Setup your API endpoints</p>
+        <h3 class="text-lg font-semibold">{t('settings').apiConnection.profiles}</h3>
+        <p class="text-muted-foreground text-sm">{t('settings').description}</p>
       </div>
       <Button onclick={startNewProfile}>
         <Plus class="h-4 w-4" />
-        Add Profile
+        {t('settings').apiConnection.addProfile}
       </Button>
     </div>
   </div>
@@ -281,7 +282,7 @@
       <CardContent>
         <div class="mb-3 flex items-center gap-2">
           <Star class="text-primary h-4 w-4" />
-          <span class="text-primary text-sm font-medium">New Profile</span>
+          <span class="text-primary text-sm font-medium">{t('settings').apiConnection.newProfile}</span>
         </div>
 
         <Separator class="mb-4" />
@@ -307,7 +308,7 @@
         >
           {#snippet footer()}
             <div class="flex gap-2 pt-2">
-              <Button variant="outline" onclick={cancelEdit} class="flex-1">Cancel</Button>
+              <Button variant="outline" onclick={cancelEdit} class="flex-1">{t('common').cancel}</Button>
               <Button
                 onclick={handleSave}
                 disabled={!formName.trim() ||
@@ -315,7 +316,7 @@
                 class="flex-1"
               >
                 <Check class="h-4 w-4" />
-                Create Profile
+                {t('settings').apiConnection.addProfile}
               </Button>
             </div>
           {/snippet}
@@ -348,10 +349,10 @@
                     <Badge
                       variant="default"
                       class="hidden shrink-0 items-center justify-center md:flex"
-                      title="Used when agent profiles don't specify an API profile"
+                      title={t('settings').apiConnection.fallback}
                     >
                       <Star class="mr-1 h-3 w-3" />
-                      Fallback
+                      {t('settings').apiConnection.fallback}
                     </Badge>
                   {/if}
                 </div>
@@ -360,8 +361,7 @@
                     {profile.providerType}
                   </Badge>
                   <Badge variant="outline" class="text-muted-foreground text-xs">
-                    {settings.getProfileModels(profile.id).length}
-                    models
+                    {settings.getProfileModels(profile.id).length} {t('common').models}
                   </Badge>
                 </div>
               </div>
@@ -376,9 +376,9 @@
                   <Badge
                     variant="default"
                     class="shrink-0 text-xs md:hidden"
-                    title="Used when agent profiles don't specify an API profile"
+                    title={t('settings').apiConnection.fallback}
                   >
-                    Fallback
+                    {t('settings').apiConnection.fallback}
                   </Badge>
                 {/if}
                 {#if settings.apiSettings.profiles.length > 1 && profile.id !== settings.apiSettings.defaultProfileId}
@@ -387,7 +387,7 @@
                     size="icon"
                     class="w-5"
                     onclick={() => handleSetDefault(profile.id)}
-                    title="Set as fallback profile"
+                    title={t('settings').apiConnection.setFallback}
                   >
                     <Star class="h-4 w-4" />
                   </Button>
@@ -419,11 +419,11 @@
               />
               <p class="text-muted-foreground mt-2 min-h-[1lh] text-right text-xs">
                 {#if saveStatus === 'saving'}
-                  Saving...
+                  {t('settings').apiConnection.saving}
                 {:else if saveStatus === 'saved'}
-                  ✓ Saved
+                  {t('settings').apiConnection.saved}
                 {:else if saveStatus === 'error'}
-                  <span class="text-destructive">⚠ Save failed</span>
+                  <span class="text-destructive">⚠ {t('common').error}</span>
                 {/if}
               </p>
             </div>
@@ -440,13 +440,13 @@
           >
             <KeyIcon class="text-muted-foreground h-6 w-6" />
           </div>
-          <h4 class="mb-2 font-medium">No API profiles yet</h4>
+          <h4 class="mb-2 font-medium">{t('settings').apiConnection.noProfiles}</h4>
           <p class="text-muted-foreground mb-4 text-sm">
-            Add an API profile to connect to your LLM provider
+            {t('settings').apiConnection.noProfilesDescription}
           </p>
           <Button onclick={startNewProfile}>
             <Plus class=" h-4 w-4" />
-            Add Your First Profile
+            {t('settings').apiConnection.addFirstProfile}
           </Button>
         </CardContent>
       </Card>
